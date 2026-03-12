@@ -1,125 +1,82 @@
-```html
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>한국 음식 홍보</title>
+import streamlit as st
 
-<style>
-body{
-    margin:0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg,#fff5e6 0%,#ffffff 50%,#ffedda 100%);
-}
+# 페이지 설정
+st.set_page_config(page_title="한국 음식 홍보", layout="wide")
 
-h1,h2,h3{
-    color:#333;
-    text-align:center;
-}
-
-.container{
-    display:flex;
-    justify-content:center;
-    gap:30px;
-    padding:40px;
-}
-
-.card{
-    background:rgba(255,255,255,0.7);
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 4px 6px rgba(0,0,0,0.1);
-    width:300px;
-    text-align:center;
-}
-
-.card img{
-    width:100%;
-    border-radius:10px;
-}
-
-button{
-    background:#ff4b4b;
-    color:white;
-    border:none;
-    padding:10px 15px;
-    border-radius:10px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-button:hover{
-    background:#e63939;
-    transform:scale(1.05);
-}
-
-.subscribe{
-    text-align:center;
-    padding:40px;
-}
-
-input{
-    padding:10px;
-    border-radius:8px;
-    border:1px solid #ccc;
-}
-</style>
-
-<script>
-function info(text){
-    alert(text)
-}
-
-function subscribe(){
-    let email=document.getElementById("email").value
-
-    if(email===""){
-        alert("이메일 주소를 입력해주세요")
-    }else{
-        alert("감사합니다! "+email+" 로 소식을 보내드리겠습니다")
+# 디자인 스타일 적용 (Градиентный фон и стили)
+st.markdown("""
+    <style>
+    .stApp {
+        background: linear-gradient(135deg, #fff5e6 0%, #ffffff 50%, #ffedda 100%);
     }
-}
-</script>
+    h1, h2, h3 {
+        color: #333333;
+        font-family: 'Nanum Gothic', sans-serif;
+    }
+    .stButton>button {
+        background-color: #ff4b4b;
+        color: white;
+        border-radius: 10px;
+        font-weight: bold;
+        border: none;
+        padding: 0.5rem 1rem;
+        transition: 0.3s;
+    }
+    .stButton>button:hover {
+        background-color: #e63939;
+        transform: scale(1.05);
+        color: white;
+    }
+    /* Стиль для карточек (колонок) */
+    [data-testid="column"] {
+        background-color: rgba(255, 255, 255, 0.6);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-</head>
+# 메인 제목
+st.title("🇰🇷 한국 음식 알리기")
+st.subheader("맛있는 한국의 맛을 경험해보세요")
 
-<body>
+st.write("---")
 
-<h1>🇰🇷 한국 음식 알리기</h1>
-<h3>맛있는 한국의 맛을 경험해보세요</h3>
+col1, col2, col3 = st.columns(3)
 
-<div class="container">
+# 1. 김밥 
+with col1:
+    st.image("https://tse4.mm.bing.net/th/id/OIP.5GgflGEO_cjmIwFIHr1FxAHaFj?rs=1&pid=ImgDetMain", use_container_width=True)
+    st.markdown("### 1. 김밥")
+    st.write("신선한 야채와 다양한 재료를 밥과 김으로 말아 만든 한국의 대표적인 간식입니다.")
+    if st.button("김밥 상세보기"):
+        st.info("김밥은 영양이 풍부하고 휴대가 간편하여 소풍 음식으로 인기가 많습니다.")
 
-<div class="card">
-<img src="https://tse4.mm.bing.net/th/id/OIP.5GgflGEO_cjmIwFIHr1FxAHaFj?rs=1&pid=ImgDetMain">
-<h3>1. 김밥</h3>
-<p>신선한 야채와 다양한 재료를 밥과 김으로 말아 만든 한국의 대표적인 간식입니다.</p>
-<button onclick="info('김밥은 영양이 풍부하고 소풍 음식으로 인기가 많습니다.')">김밥 상세보기</button>
-</div>
+# 2. 라면 
+with col2:
+    st.image("https://images.unsplash.com/photo-1569718212165-3a8278d5f624?q=80&w=500", use_container_width=True)
+    st.markdown("### 2. 라면")
+    st.write("매콤한 국물과 쫄깃한 면발이 일품인 한국인의 소울푸드입니다.")
+    if st.button("라면 상세보기"):
+        st.success("한국 라면은 전 세계적으로 사랑받는 매운맛의 대명사입니다.")
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?q=80&w=500">
-<h3>2. 라면</h3>
-<p>매콤한 국물과 쫄깃한 면발이 일품인 한국인의 소울푸드입니다.</p>
-<button onclick="info('한국 라면은 전 세계적으로 사랑받는 매운맛 음식입니다.')">라면 상세보기</button>
-</div>
+# 3. 떡볶이 
+with col3:
+    st.image("https://tse4.mm.bing.net/th/id/OIP.Bjo_rSHLbF60jvgzUcNJvQHaHa?rs=1&pid=ImgDetMain", use_container_width=True)
+    st.markdown("### 3. 떡볶이")
+    st.write("쫄깃한 떡과 매콤달콤한 고추장 소스가 어우러진 최고의 길거리 음식입니다.")
+    if st.button("떡볶이 상세보기"):
+        st.warning("떡볶이는 어묵, 계란, 튀김과 함께 먹으면 더욱 맛있습니다.")
 
-<div class="card">
-<img src="https://tse4.mm.bing.net/th/id/OIP.Bjo_rSHLbF60jvgzUcNJvQHaHa?rs=1&pid=ImgDetMain">
-<h3>3. 떡볶이</h3>
-<p>쫄깃한 떡과 매콤달콤한 고추장 소스가 어우러진 최고의 길거리 음식입니다.</p>
-<button onclick="info('떡볶이는 어묵과 계란과 함께 먹으면 더 맛있습니다.')">떡볶이 상세보기</button>
-</div>
+st.write("---")
 
-</div>
-
-<div class="subscribe">
-<h3>📧 소식지 구독하기</h3>
-<input id="email" placeholder="example@mail.com">
-<button onclick="subscribe()">구독 신청</button>
-</div>
-
-</body>
-</html>
-```
+# 하단 구독 섹션
+st.write("### 📧 소식지 구독하기")
+user_email = st.text_input("이메일 주소를 입력하세요", placeholder="example@mail.com")
+if st.button("구독 신청"):
+    if user_email:
+        st.balloons()
+        st.write(f"감са합니다! **{user_email}**로 최신 정보를 보내드리겠습니다.")
+    else:
+        st.error("이메일 주소를 정확히 입력해주세요.")
